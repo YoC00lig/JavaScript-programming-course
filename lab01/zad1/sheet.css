@@ -1,0 +1,54 @@
+aside  {
+    width: 600px;
+    float: right;
+}
+
+body {
+    padding: 10px;
+}
+
+body > *:not(:last-child, :nth-child(4)) {
+    margin-bottom: 20px;
+}
+
+main { 
+    width: 500px;
+    clear: left;
+    margin-bottom: 10px;
+}
+nav {
+    width: max-content;
+    float: left;
+}
+
+main blockquote {
+    margin: 0;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.azure {
+    background-color: rgb(223, 243, 243);
+}
+
+.shadows {
+    box-shadow: 0 0 5px rgb(69, 59, 59);
+    border: 0.5px solid black;
+    padding: 10px 10px;
+}
+
+h1 {
+    animation: colorChange 1.5s infinite alternate;
+    -webkit-animation: colorChange 1.5s infinite alternate;    
+}
+
+@keyframes colorChange
+{
+    from {color:palevioletred;}
+    to {color:rgb(86, 177, 175);}
+}
+
+@-webkit-keyframes colorChange
+{
+    from {color:palevioletred;}
+    to {color:rgb(86, 177, 175);}
+}
