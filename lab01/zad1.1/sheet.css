@@ -24,7 +24,6 @@ main {
 nav {
     width: max-content;
     float: left;
-    margin: 0 25px;
 }
 
 main blockquote {
