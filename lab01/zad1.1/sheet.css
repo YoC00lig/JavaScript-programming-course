@@ -1,3 +1,8 @@
+:root {
+    --text-color-initial: palevioletred;
+    --text-color-final: rgb(86, 177, 175);
+}
+
 aside  {
     width: 600px;
     float: right;
@@ -43,12 +48,12 @@ h1 {
 
 @keyframes colorChange
 {
-    from {color:palevioletred;}
-    to {color:rgb(86, 177, 175);}
+    from {color: var(--text-color-initial);}
+    to {color: var(--text-color-final);}
 }
 
 @-webkit-keyframes colorChange
 {
-    from {color:palevioletred;}
-    to {color:rgb(86, 177, 175);}
+    from {color: var(--text-color-initial);}
+    to {color: var(--text-color-final);}
 }

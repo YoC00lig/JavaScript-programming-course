@@ -1,0 +1,71 @@
+:root {
+    --text-color-initial: palevioletred;
+    --text-color-final: rgb(86, 177, 175);
+}
+
+aside  {
+    width: 37.5em;
+    float: right;
+}
+
+body {
+    padding: 0.625em;
+}
+
+body > *:not(:last-child, :nth-child(4)) {
+    margin-bottom: 1.25em;
+}
+
+main { 
+    width: 31.25em;
+    clear: left;
+    margin-bottom: 0.625em;
+}
+nav {
+    width: max-content;
+    float: left;
+}
+
+main blockquote {
+    margin: 0;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.azure {
+    background-color: rgb(223, 243, 243);
+}
+
+.shadows {
+    box-shadow: 0 0 0.3em rgb(69, 59, 59);
+    border: 0.03em solid black;
+    padding: 0.625em 0.625em;
+}
+
+h1 {
+    animation: colorChange 1.5s infinite alternate;
+    -webkit-animation: colorChange 1.5s infinite alternate;    
+}
+
+@keyframes colorChange
+{
+    from {color: var(--text-color-initial);}
+    to {color: var(--text-color-final);}
+}
+
+@-webkit-keyframes colorChange
+{
+    from {color: var(--text-color-initial);}
+    to {color: var(--text-color-final);}
+}
+
+@media screen and  (max-width: 600px){
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    aside, main, nav {
+        width: auto;
+    }
+}
+    
