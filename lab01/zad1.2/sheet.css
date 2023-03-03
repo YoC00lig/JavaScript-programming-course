@@ -83,7 +83,7 @@ h1 {
 /* fontsizes */
 @media screen and (min-width: 1800px){
     html {
-        font-size: 100%;
+        font-size: 120%;
     }
 }
 
