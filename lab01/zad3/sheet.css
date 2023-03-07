@@ -1,0 +1,99 @@
+button:hover{
+    border: 1px solid black;
+}
+
+@media screen and (max-width: 574px){
+    #pic1 {
+        animation: rotate180 1.5s 1;
+        -webkit-animation: rotate180 1.5s 1;   
+        animation-fill-mode: forwards;
+        -webkit-animation-fill-mode: forwards;
+    }
+
+    #pic2 {
+        animation: rotate150 1.5s 1;
+        -webkit-animation: rotate150 1.5s 1;   
+        animation-fill-mode: forwards;
+        -webkit-animation-fill-mode: forwards;
+    }
+
+    #pic3 {
+        animation: rotate60 1.5s 1;
+        -webkit-animation: rotate60 1.5s 1;   
+        animation-fill-mode: forwards;
+        -webkit-animation-fill-mode: forwards;
+    }
+
+    #pic4 {
+        animation: flip 1.5s linear;
+        -webkit-animation: flip 1.5s linear;   
+        animation-fill-mode: forwards;
+        -webkit-animation-fill-mode: forwards;
+    }
+
+}
+
+
+/* First card */
+@keyframes rotate180
+{
+    from {transform: rotate(0deg);}
+    to {transform: rotate(180deg) scale(1.0,0.3);}
+}
+
+@-webkit-keyframes rotate180
+{
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(180deg) scale(1.0,0.3);}
+}
+
+
+/* second card */
+
+@keyframes rotate150
+{
+    from {transform: rotate(0deg);}
+    to {transform: rotate(150deg);}
+}
+
+@-webkit-keyframes rotate150
+{
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(150deg);}
+}
+
+/* third card */
+
+@keyframes rotate60
+{
+    from {transform: rotate(0deg);}
+    to {transform: rotate(60deg) translate(50px, -35px);}
+}
+
+@-webkit-keyframes rotate60
+{
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(60deg) translate(50px,-35px);}
+}
+
+/* fourth card */
+
+@keyframes flip
+{
+   50% {
+    transform: rotateX(180deg);
+   }
+   to {
+    transform: rotateX(360deg) scale(0.5) translate(0, 150px);
+   }
+}
+
+@-webkit-keyframes flip
+{
+    50% {
+        -webkit-transform: rotateX(180deg);
+       }
+    to {
+        -webkit-transform: rotateX(360deg) scale(0.5) translate(0,150px);
+       }
+}
