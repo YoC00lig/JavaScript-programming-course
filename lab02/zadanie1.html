@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>podpunkt 10-12</title>
+</head>
+<body>
+    <form oninput="wynik.value = pole_tekstowe.value + pole_liczbowe.value">
+        <input id="pole_tekstowe" placeholder="Wprowadź tekst" type="text">
+        +
+        <input id="pole_liczbowe" type="number" placeholder="Wprowadź liczbę">    
+        =
+        <output name="wynik" for="pole_tekstowe pole_liczbowe">Tu pojawi się wynik obliczeń</output>    
+        <br>    
+        <input type="button" value="Wypisz">
+    </form>
+
+    <script defer>
+        for (let i=0; i<4;i++){
+            let value = window.prompt("Podaj jakąś wartość", "empty");
+            console.log(`Wczytana wartość ${value} Typ wczytanej wartosci ${typeof value}`)
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- Sprawdź, co jest wypisywane dla następujących czterech przypadków:
+
+Użytkownik wprowadził wartość będącą liczbą i nacisnął klawisz 'Enter' lub przycisk 'OK'
+
+Wczytana wartość 1 Typ wczytanej wartosci string
+
+Użytkownik wprowadził wartość będącą napisem i nacisnął klawisz 'Enter' lub przycisk 'OK'
+
+Wczytana wartość asdfg Typ wczytanej wartosci string
+
+Użytkownik nie wprowadził wartości, a następnie nacisnął powyższy klawisz / przycisk
+
+Wczytana wartość empty Typ wczytanej wartosci string
+
+Użytkownik wprowadził wartość, a następnie nacisnął przycisk 'Anuluj'
+
+Wczytana wartość null Typ wczytanej wartosci object
+
+-->

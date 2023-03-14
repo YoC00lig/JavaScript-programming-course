@@ -1,0 +1,34 @@
+<html>
+  <body onLoad="
+            console.log('Tekst 1');
+            window.alert('Tekst 2');">
+            <!-- 
+                document.write('Tekst 3');
+
+                Wykonujemy to po zakończeniu 
+                renderowania strony, więc cała zawartość strony 
+                zostaje nadpisana.
+             -->
+          
+    <div>Treść dokumentu HTML</div>
+    <div>Treść dokumentu HTML</div>
+    <div>Treść dokumentu HTML</div>
+
+    <script>
+        window.prompt("Tekst1","Tekst2");
+    </script>
+
+  </body>
+</html>      
+
+<!-- 
+    Zbadaj, jakie znaczenie mają poszczególne argumenty metody window.prompt() i czy są one obowiązkowe.
+
+    metoda posiada dwa argumenty. Pierwszy z nich słuzy tworzy treść (napis) nad polem, które 
+    słuzy do wprowadzenia odpowiedzi przez uzytkownika. Drugi stanowi wartość domyślną będącą w polu,
+     które sluzy do wprowadzania odpowiedzi przez uzytkownika
+
+
+     Żaden z tych argumentów nie jest obowiązkowy.
+
+ -->
