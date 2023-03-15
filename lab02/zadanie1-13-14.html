@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podpunkt 13 i 14</title>
+</head>
+<body>
+    <form name="Form">
+        <input name="pole_tekstowe" placeholder="Wprowadź tekst" type="text">
+        +
+        <input name="pole_liczbowe" type="number" placeholder="Wprowadź liczbę">    
+        =
+        <output name="wynik" for="pole_tekstowe pole_liczbowe">Tu pojawi się wynik obliczeń</output>    
+        <br>    
+        <input type="button" value="Wypisz" onclick="handler();">
+    </form>
+
+
+    <script defer>
+        function handler(){
+            const Form = document.forms.Form;
+            const Text = Form.elements["pole_tekstowe"].value;
+            const Num = +Form.elements["pole_liczbowe"].value;
+            const Output = Form.elements.wynik;
+            Output.innerHTML = Text + Num;
+            console.log(`Wczytana wartość pola tekstowego: ${Text} \n Typ wczytanej wartosci ${typeof Text}`);
+            console.log(`Wczytana wartość pola liczbowego ${Num} \n Typ wczytanej wartosci ${typeof Num}`)
+        }
+    </script>
+    
+</body>
+</html>
+
+<!-- Zbadaj, co wypisuje event handler w przypadku:
+
+Wprowadzenia wartości będącej liczbą i naciśnięcia powyższego przycisku
+
+3
+
+Wczytana wartość pola tekstowego: 3 
+Typ wczytanej wartosci string
+
+Wczytana wartość pola liczbowego 3 
+Typ wczytanej wartosci number
+
+
+Wprowadzenia wartości będącej napisem i naciśnięcia ww. przycisku
+
+cs
+
+Wczytana wartość pola tekstowego: cs 
+Typ wczytanej wartosci string
+
+Wczytana wartość pola liczbowego 0 
+Typ wczytanej wartosci number
+
+Niewprowadzenia wartości i naciśnięcia przycisku "Wypisz" 
+
+Wczytana wartość pola tekstowego:  
+Typ wczytanej wartosci string
+
+Wczytana wartość pola liczbowego 0 
+Typ wczytanej wartosci number
+
+
+-->
