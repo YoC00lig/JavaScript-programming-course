@@ -11,7 +11,7 @@ function cyfry(napis){
             else nieparzysta += +cyfra;
         }
     }
-    return {parzysta, nieparzysta};
+    return [parzysta, nieparzysta];
 }
 
 
@@ -24,7 +24,7 @@ function litery(napis){
             else male++;
         }
     }
-    return {male, duze};
+    return [male, duze];
 }
 
 function suma(napis){

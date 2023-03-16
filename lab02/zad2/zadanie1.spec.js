@@ -5,6 +5,7 @@ var expect = chai.expect;
 describe('Same cyfry', () => {
     it('2 = 2 (parzyste) i 1+3 = 4 (nieparzyste)', () => {
         const result = cyfry('123');
+        console.log(result);
         expect(result[0]).to.equal(2);
         expect(result[1]).to.equal(4);
     })
