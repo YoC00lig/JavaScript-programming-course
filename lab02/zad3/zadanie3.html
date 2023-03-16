@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+ <html lang="pl">
+   <head>
+     <meta charset="UTF-8">
+     <title>Page title</title>
+     <script>
+        // Napis nie wyświetlił się, poniewaz w chwili uruchomienia skryptu element o id 'canvas' nie został jeszcze załadowany -
+        // w konsoli pojawia się błąd o wywolaniu getContext na obiekcie null
+
+        // Rozwiązaniem tego problemu moze być opakowanie kodu w event listener 'load', 
+        // ktory sprawi ze kod skryptu uruchomi sie dopiero gdy kod HTML zostanie zaladowany
+        // (wtedy zostanie stworzony element o id canvas)
+
+        // kolejny problem powodował brak 'var' przy zmiennej ctx 
+        // - po dodaniu tych dwoch rzeczy napis sie załadował. 
+
+        window.addEventListener('load', () => {
+            "use strict"; // Nie wyłączaj trybu ścisłego    
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');        
+            ctx.fillText("Hello World", 10, 50); //Wykreślenie podanego tekstu na płótnie
+
+
+        });
+
+     </script>
+   </head>
+   <body>
+     <main>
+       <h1>Płótno</h1>
+       <canvas id="canvas" width="500" height="500" style="border:1px solid #000000;">
+       Wygląda na to, że twoja przeglądarka nie obsługuje elementu "canvas" 
+       </canvas>
+     </main>
+   </body>
+   </html>
