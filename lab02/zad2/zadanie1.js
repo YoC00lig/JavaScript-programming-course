@@ -36,8 +36,11 @@ function suma(napis){
         }
     }
     wynik += +liczba;
-    console.log(wynik);
     return wynik;
+}
+
+function clearWynik() {
+    wynik = 0;
 }
 
 while (true){

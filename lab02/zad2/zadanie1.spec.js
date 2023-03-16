@@ -5,7 +5,6 @@ var expect = chai.expect;
 describe('Same cyfry', () => {
     it('2 = 2 (parzyste) i 1+3 = 4 (nieparzyste)', () => {
         const result = cyfry('123');
-        console.log(result);
         expect(result[0]).to.equal(2);
         expect(result[1]).to.equal(4);
     })
@@ -15,6 +14,7 @@ describe('Same cyfry', () => {
         expect(result[1]).to.equal(0);
     })
     it('Suma dla liczby 123 to 123', () => {
+        clearWynik();
         const result = suma('123');
         expect(result).to.equal(123);
     })
@@ -34,14 +34,16 @@ describe('Same litery', () => {
         expect(result[1]).to.equal(1);
     })
     it('Suma jest zero, nie ma ani jednej liczby', () => {
+        clearWynik();
         const result = suma('abCd');
+        console.log(result);
         expect(result).to.equal(0);
     })
 
 })
 
 
-describe('Same litery,a po nich cyfry', () => {
+describe('Same litery, a po nich cyfry', () => {
     it('jest liczba 123, wiec suma parzystych = 2, suma nieparzystych  = 4', () => {
         const result = cyfry('abCd123');
         expect(result[0]).to.equal(2);
@@ -53,6 +55,7 @@ describe('Same litery,a po nich cyfry', () => {
         expect(result[1]).to.equal(1);
     })
     it('Są liczby, ale na końcu', () => {
+        clearWynik();
         const result = suma('abCd123');
         expect(result).to.equal(0);
     })
@@ -71,6 +74,7 @@ describe('Same cyfry,a po nich litery', () => {
         expect(result[1]).to.equal(2);
     })
     it('napis zaczyna się od liczby i ta liczba jest wynikiem', () => {
+        clearWynik();
         const result = suma('221sdAA');
         expect(result).to.equal(221);
     })
@@ -90,6 +94,7 @@ describe('Pusty napis', () => {
         expect(result[1]).to.equal(0);
     })
     it('pusty napis, więc wynik = 0', () => {
+        clearWynik();
         const result = suma('');
         expect(result).to.equal(0);
     })
