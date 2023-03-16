@@ -3,3 +3,6 @@
 <p> Each folder contains tasks descriptions (in Polish).</p>
 <h2>Labs:</h2>
 <p>🌸 <a href="https://github.com/YoC00lig/JavaScript-programming-course/tree/main/lab01">lab01</a> - HTML/CSS languages & (w3.css/Bulma/Bootstrap) </p>
+
+<p>🌸 <a href="https://github.com/YoC00lig/JavaScript-programming-course/tree/main/lab02">lab02</a> - JavaScript basics, mocha-chai tests, canvas </p>
+
