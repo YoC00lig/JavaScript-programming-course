@@ -156,7 +156,7 @@
   ```
   <li>Utwórz plik  'zadanie2.js' o następującej zawartości:</li>
   
-  ```HTML
+  ``` JavaScript
   
   var expect = chai.expect;
 function sum(x,y) {
