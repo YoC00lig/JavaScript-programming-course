@@ -31,9 +31,21 @@
             <!-- navbar-nav for full-height and lightweight navigation. -->
             <ul class="navbar-nav ms-auto">
                 <!-- navbar-item to add items to navbar -->
-                <li class="nav-item active"> 
-                    <a class="nav-link">Pojazdy</a>
-                </li>
+
+                <div class="dropdown">
+                  <a class="btn btn-secondary dropdown-toggle bg-warning" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Pojazdy
+                  </a>
+                
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">pojazd 1</a></li>
+                    <li><a class="dropdown-item" href="#">pojazd 2</a></li>
+                    <li><a class="dropdown-item" href="#">pojazd 3</a></li>
+                  </ul>
+
+                </div>
+
+                
                 <li>
                     <form class="d-flex">
                         <input class="form-control me-2" type="text" placeholder="Szukaj">
