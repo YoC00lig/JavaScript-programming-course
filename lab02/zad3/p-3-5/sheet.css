@@ -10,37 +10,33 @@ button:hover{
     margin: 0 1rem;
 }
 
-@media screen and (max-width: 574px){
-    #pic1 {
-        animation: rotate180 1.5s 1;
-        -webkit-animation: rotate180 1.5s 1;   
-        animation-fill-mode: forwards;
-        -webkit-animation-fill-mode: forwards;
-    }
-
-    #pic2 {
-        animation: rotate150 1.5s 1;
-        -webkit-animation: rotate150 1.5s 1;   
-        animation-fill-mode: forwards;
-        -webkit-animation-fill-mode: forwards;
-    }
-
-    #pic3 {
-        animation: rotate60 1.5s 1;
-        -webkit-animation: rotate60 1.5s 1;   
-        animation-fill-mode: forwards;
-        -webkit-animation-fill-mode: forwards;
-    }
-
-    #pic4 {
-        animation: flip 1.5s linear;
-        -webkit-animation: flip 1.5s linear;   
-        animation-fill-mode: forwards;
-        -webkit-animation-fill-mode: forwards;
-    }
-
+#pic1:hover {
+    animation: rotate180 1.5s 1;
+    -webkit-animation: rotate180 1.5s 1;   
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
 }
 
+#pic2:hover {
+    animation: rotate150 1.5s 1;
+    -webkit-animation: rotate150 1.5s 1;   
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+
+#pic3:hover {
+    animation: rotate60 1.5s 1;
+    -webkit-animation: rotate60 1.5s 1;   
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+
+#pic4:hover {
+    animation: flip 1.5s linear;
+    -webkit-animation: flip 1.5s linear;   
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
 
 /* First card */
 @keyframes rotate180
