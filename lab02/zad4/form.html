@@ -56,65 +56,60 @@
         </div>
     </nav>
 
-    <div class="container mb-5 mt-5 justify-content-start">
-      <div class="row justify-content-start ms-2">
+    <div class="container mb-5 mt-5">
+        <form>
 
-        <div class="card ms-3 me-3 mb-3" style="width: 25rem;">
-            <img class="card-img-top" src="img/all1.png" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Przyczepa</h5>
-              <p class="card-text">Opis przyczepy</p>
-              <a href="form.html" class="btn btn-primary">Wypozycz</a>
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="name">Imię i nazwisko:</label>
+              <input type="text" class="form-control" id="name" name="name" required>
             </div>
-          </div>
-  
-          <div class="card ms-3 me-3 mb-3" style="width: 25rem;">
-            <img class="card-img-top" src="img/all2.png" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Przyczepa</h5>
-              <p class="card-text">Opis przyczepy</p>
-              <a href="form.html" class="btn btn-primary">Wypozycz</a>
-            </div>
-          </div>
-  
-          <div class="card ms-3 me-3 mb-3" style="width: 25rem;">
-            <img class="card-img-top" src="img/all3.png" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Przyczepa</h5>
-              <p class="card-text">Opis przyczepy</p>
-              <a href="form.html" class="btn btn-primary">Wypozycz</a>
-            </div>
-          </div>
-  
-          <div class="card ms-3 me-3" style="width: 25rem;">
-            <img class="card-img-top" src="img/all4.png" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Przyczepa</h5>
-              <p class="card-text">Opis przyczepy</p>
-              <a href="form.html" class="btn btn-primary">Wypozycz</a>
-            </div>
-          </div>
-  
-          <div class="card ms-3 me-3" style="width: 25rem;">
-            <img class="card-img-top" src="img/all5.png" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Przyczepa</h5>
-              <p class="card-text">Opis przyczepy</p>
-              <a href="form.html" class="btn btn-primary">Wypozycz</a>
-            </div>
-          </div>
-  
-          <div class="card ms-3 me-3" style="width: 25rem;">
-            <img class="card-img-top" src="img/all6.png" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Przyczepa</h5>
-              <p class="card-text">Opis przyczepy</p>
-              <a href="form.html" class="btn btn-primary">Wypozycz</a>
-            </div>
-          </div>
 
-      </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="phone">Numer telefonu:</label>
+              <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="carModel">Model samochodu:</label>
+              <input type="text" class="form-control" id="carModel" name="carModel" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="carMake">Marka samochodu:</label>
+              <input type="text" class="form-control" id="carMake" name="carMake" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="startDate">Data wypożyczenia:</label>
+              <input type="date" class="form-control" id="startDate" name="startDate" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="endDate">Data zwrotu:</label>
+              <input type="date" class="form-control" id="endDate" name="endDate" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="vehicleType">Rodzaj pojazdu:</label>
+              <select class="form-control" id="vehicleType" name="vehicleType" required>
+                <option value="">Wybierz rodzaj pojazdu</option>
+                <option value="car">Samochód</option>
+                <option value="motorcycle">Przyczepa</option>
+                <option value="bike">Samochód+przyczepa</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="imageUrl">URL zdjęcia pojazdu:</label>
+              <input type="url" class="form-control" id="imageUrl" name="imageUrl" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+          </form>
+          
+          
     </div>
+
 
     <div class="container bg-success text-white">
         <footer>© Copyright</footer>
