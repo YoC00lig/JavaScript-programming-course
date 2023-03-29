@@ -13,7 +13,7 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="sheet.css" media="screen" type="text/css">
-    <script src="script.js" defer></script>
+    <script src="script2.js" defer></script>
     <title>Sklep z pojazdami</title>
   </head>
   <body onload="draw();">
@@ -32,9 +32,9 @@
             <ul class="navbar-nav ms-auto">
                 <!-- navbar-item to add items to navbar -->
                 <li class="nav-item active me-3"> 
-                  <a class="nav-link" href="return.html">Zwróć Pojazd</a>
-                </li>
-
+                    <a class="nav-link" href="return.html">Zwróć Pojazd</a>
+                  </li>
+  
                 <div class="dropdown me-3">
                   <a class="btn btn-secondary dropdown-toggle bg-warning" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     Pojazdy
@@ -60,49 +60,49 @@
     </nav>
 
     <div class="container mb-5 mt-5">
+        <form id = "returnVehicle">
 
-        <div class="row justify-content-start">
-            <div class="card col-sm-6 mb-3" id="pic1">
-                <img src="img/auto1.png" class="card-img-top" alt="Volkswagen Tiguan">
-                <div class="card-body">
-                  <h5 class="card-title">Volkswagen Tiguan</h5>
-                  <ul class="card-text">
-                    <li>silnik benzynowy</li>
-                    <li>automatyczna skrzynia biegów</li>
-                  </ul>
-                </div>
-              </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="name">Imię i nazwisko:</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+            </div>
 
-              <div class="card col-sm-6" style="height: fit-content;" id="pic2">
-                <img src="img/auto2.png" class="card-img-top" alt="Fiat500">
-                <div class="card-body">
-                  <h5 class="card-title">Fiat500</h5>
-                  <ul class="card-text">
-                    <li>silnik elektryczny</li>
-                    <li>przebieg 100tyś</li>
-                  </ul>
-                </div>
-              </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="carModel">Model samochodu:</label>
+              <input type="text" class="form-control" id="carModel" name="carModel" required>
+            </div>
 
-        </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="carMake">Marka samochodu:</label>
+              <input type="text" class="form-control" id="carMake" name="carMake" required>
+            </div>
 
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="startDate">Data wypożyczenia:</label>
+              <input type="date" class="form-control" id="startDate" name="startDate" required>
+            </div>
 
-        <div class="row justify-content-end">
-            <div class="card col-sm-3 me-3" id="pic3">
-                <img src="img/auto3.png" class="card-img-top" alt="Volkswagen New Beetle">
-                <div class="card-body">
-                  <h5 class="card-title">Volkswagen New Beetle</h5>
-                </div>
-              </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="endDate">Data zwrotu:</label>
+              <input type="date" class="form-control" id="endDate" name="endDate" required>
+            </div>
 
-              <div class="card col-sm-3" id="pic4">
-                <img src="img/auto4.png" class="card-img-top" alt="Mini Cooper">
-                <div class="card-body">
-                  <h5 class="card-title">Mini Cooper</h5>
-                </div>
-              </div>
-        </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="vehicleType">Rodzaj pojazdu:</label>
+              <select class="form-control" id="vehicleType" name="vehicleType" required>
+                <option value="">Wybierz rodzaj pojazdu</option>
+                <option value="car">Samochód</option>
+                <option value="motorcycle">Przyczepa</option>
+                <option value="bike">Samochód+przyczepa</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Zwróć</button>
+          </form>
+          
+          
     </div>
+
 
     <div class="container bg-success text-white">
         <footer>© Copyright</footer>
