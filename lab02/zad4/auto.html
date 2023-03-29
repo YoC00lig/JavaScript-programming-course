@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="sheet.css" media="screen" type="text/css">
+    <script src="script.js" defer></script>
+    <title>Sklep z pojazdami</title>
+  </head>
+  <body onload="draw();">
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-warning ">
+        <a href="index.html" class="navbar-brand mb-0 h1">
+          <canvas id ='logo'></canvas>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- navbar-nav for full-height and lightweight navigation. -->
+            <ul class="navbar-nav ms-auto">
+                <!-- navbar-item to add items to navbar -->
+
+                <div class="dropdown me-3">
+                  <a class="btn btn-secondary dropdown-toggle bg-warning" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Pojazdy
+                  </a>
+                
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="auto.html">Samochód</a></li>
+                    <li><a class="dropdown-item" href="trailer.html">Przyczepa</a></li>
+                    <li><a class="dropdown-item" href="all.html">Samochód + przyczepa</a></li>
+                  </ul>
+
+                </div>
+
+                
+                <li>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="text" placeholder="Szukaj">
+                        <button class="btn btn-warning border border-secondary me-3" type="button">Szukaj</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mb-5 mt-5 justify-content-start">
+      <div class="row justify-content-start ms-2">
+
+        <div class="card ms-3 me-3 mb-3" style="width: 25rem;">
+          <img class="card-img-top" src="img/auto1.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Samochód</h5>
+            <p class="card-text">Opis samochodu</p>
+            <a href="#" class="btn btn-primary">Wypozycz</a>
+          </div>
+        </div>
+
+        <div class="card ms-3 me-3 mb-3" style="width: 25rem;">
+          <img class="card-img-top" src="img/auto2.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Samochód</h5>
+            <p class="card-text">Opis samochodu</p>
+            <a href="#" class="btn btn-primary">Wypozycz</a>
+          </div>
+        </div>
+
+        <div class="card ms-3 me-3 mb-3" style="width: 25rem;">
+          <img class="card-img-top" src="img/auto3.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Samochód</h5>
+            <p class="card-text">Opis samochodu</p>
+            <a href="#" class="btn btn-primary">Wypozycz</a>
+          </div>
+        </div>
+
+        <div class="card ms-3 me-3" style="width: 25rem;">
+          <img class="card-img-top" src="img/auto4.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Samochód</h5>
+            <p class="card-text">Opis samochodu</p>
+            <a href="#" class="btn btn-primary">Wypozycz</a>
+          </div>
+        </div>
+
+        <div class="card ms-3 me-3" style="width: 25rem;">
+          <img class="card-img-top" src="img/auto5.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Samochód</h5>
+            <p class="card-text">Opis samochodu</p>
+            <a href="#" class="btn btn-primary">Wypozycz</a>
+          </div>
+        </div>
+
+        <div class="card ms-3 me-3" style="width: 25rem;">
+          <img class="card-img-top" src="img/auto6.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Samochód</h5>
+            <p class="card-text">Opis samochodu</p>
+            <a href="#" class="btn btn-primary">Wypozycz</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container bg-success text-white">
+        <footer>© Copyright</footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+          crossorigin="anonymous"></script>
+  </body>
+</html>
