@@ -1,0 +1,55 @@
+@keyframes colorChange
+{
+    from {color: var(--text-color-initial);}
+    to {color: var(--text-color-final);}
+}
+
+@-webkit-keyframes colorChange
+{
+    from {color: var(--text-color-initial);}
+    to {color: var(--text-color-final);}
+}
+
+/* Phone view */
+@media screen and  (max-width: 37.5em){  
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    body > * {
+        width: auto;
+        float: none;
+    }
+    
+    nav {
+        margin: 0;
+    }
+
+    html {
+        font-size: 50%;
+    }
+}
+
+
+@media screen and (min-width: 1800px){
+    html {
+        font-size: 120%;
+    }
+}
+
+@media screen and (max-width: 1800px){
+    html {
+        font-size: 80%;
+    }
+}
+@media screen and (max-width: 1200px){
+    html {
+        font-size: 70%;
+    }
+}
+@media screen and (max-width: 900px){
+    html {
+        font-size: 55%;
+    }
+}
