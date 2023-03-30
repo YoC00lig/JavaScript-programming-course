@@ -9,9 +9,14 @@ const azureElements = document.querySelectorAll(".azure");
 const elements = document.querySelectorAll('.shadows');
 const blockquote = document.querySelector('blockquote'); 
 const addButton = document.getElementById("add-button");
+const deleteButton = document.getElementById("delete-button");
+const setButton = document.getElementById("set-button");
 
+addButton.addEventListener("click", e => {addSentence(e);})
+deleteButton.addEventListener("click", e => {deleteStyles(e);})
+setButton.addEventListener("click", e => {setStyles(e);})
 
-function setStyles() {
+function setStyles(e) {
     root.style.setProperty('--text-color-initial', 'palevioletred');
     root.style.setProperty('--text-color-final', 'rgb(86, 177, 175)');
     aside.style.width = '29.7em';
@@ -40,7 +45,7 @@ function setStyles() {
     }
   }
   
-function deleteStyles() {
+function deleteStyles(e) {
     document.querySelectorAll('*').forEach(element => {
         element.className = "";
         element.removeAttribute('style');
@@ -70,7 +75,7 @@ const text = ["Natenczas Wojski chwycił na taśmie przypięty",
 
 
 let i = 0;
-function addSentence() {
+function addSentence(e) {
   if (i == text.length) {
     addButton.disabled = true;
     return;

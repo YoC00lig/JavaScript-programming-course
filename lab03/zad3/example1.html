@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"
+          crossorigin=""></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+          crossorigin=""></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>
+      Example 1
+    </title>
+  </head>
+  <body>
+    <div id="root">
+      <!-- 
+        Kontener dla komponentu. 
+        React renderuje wyspecyfikowany kod HTML wewnątrz tzw. kontenera, 
+        tj. wybranego przez nas elementu strony internetowej. 
+        -->
+    </div>
+    <!-- Komponent 'Hello' -->
+    <script type="text/babel">
+        // Logika komponentu
+        class Hello extends React.Component {
+            render() {
+                return <h1>Hello World!</h1>;
+            }
+        }
+        const container = document.getElementById('root'); // Pobieranie referencji na kontener
+        const root = ReactDOM.createRoot(container);       // Tworzenie korzenia React-a dla podanego kontenera
+        root.render(<Hello />);                            // Renderowanie komponentu
+    </script>
+  </body>
+</html>

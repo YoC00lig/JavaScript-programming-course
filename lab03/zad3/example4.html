@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"
+          crossorigin=""></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+          crossorigin=""></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>
+      Example 4
+    </title>
+  </head>
+  <body>
+    <div id="root">
+      <!-- 
+        Kontener dla komponentu. 
+        React renderuje wyspecyfikowany kod HTML wewnątrz tzw. kontenera, 
+        tj. wybranego przez nas elementu strony internetowej. 
+        -->
+    </div>
+    <!-- 
+        Komunikacja pomiędzy komponentami 'EchoInput' a 'EchoOutput'.
+        Aby mogły się komunikować, to musimy utworzyć komponent rodzicielski, tu "Echo' - będzie on przechowywał dane
+    -->
+    <script type="text/babel">
+        // Komponent 'EchoInput' - odpowiada za wczytanie danych -->
+        class EchoInput extends React.Component {
+            constructor(props) {
+                super(props);
+                this.handleTextChange = this.handleTextChange.bind(this);
+            }
+            // Obserwator zdarzenia 'Change' - ta metoda jest wywoływana, gdy pojawi się zdarzenie 'Change' 
+            handleTextChange(e) {
+                this.props.handleTextChange(e.target.value); // Wywołuję metodę 'handleTextChange() zdefiniowaną w komponencie rodzicielskim 'Echo', w efekcie następuje przekazanie wczytanych danych z komponentu (potomnego) 'EchoInput' do komponentu rodzicielskiego 'Echo' 
+            }
+            render() {
+                // Gdy wprowadzę nowy znak w '<input>, to generowane jest zdarzenie 'Change'
+                // Informacje nt. zdarzeń — https://www.pluralsight.com/guides/use-plain-javascript-events-in-react
+                return (
+                    <input value={this.props.text} onChange={this.handleTextChange} />
+                );
+            }
+        }
+        // Komponent 'EchoOutput' - odpowiada za wypisanie wczytanych danych -->
+        class EchoOutput extends React.Component {
+            render() {
+                // Komponent 'EchoOutput' odbiera przekazaną wartość (zmienna 'text'), z komponentu 'Echo', za pomocą obiektu 'props' 
+                return (
+                    <div> Output: {this.props.text}</div >
+                );
+            }
+        }
+        // Komponent 'Echo' -->
+        class Echo extends React.Component {
+            constructor(props) {
+                super(props);
+                this.handleTextChange = this.handleTextChange.bind(this);
+                this.state = { text: '' }; // Zmienna stanowa 'text' - przechowuje wartość wczytaną za pomocą 'EchoInput'
+            };
+            // Metoda do modyfikacji zmiennej stanowej 'text' - będzie ona wywoływana z komponentu potomnego 'EchoInput'
+            handleTextChange(newText) {
+                this.setState({ text: newText });
+            }
+            render() {
+                return (
+                    <React.Fragment>
+                        <h1>Komponent 'EchoInput'</h1>
+                        <EchoInput text={this.state.text} handleTextChange={this.handleTextChange} />
+                        <h1>Komponent 'EchoOutput'</h1>
+                        {/* W celu przekazania wartości (zmiennej stanowej 'text') z komponentu rodzicielskiego 'Echo' do komponentu potomnego 'EchoOutput'. musimy użyć własności komponentu potomnego */}
+                        <EchoOutput text={this.state.text} />
+                    </React.Fragment>
+                );
+            }
+        }
+        const container = document.getElementById('root'); // Pobieranie referencji na kontener
+        const root = ReactDOM.createRoot(container);       // Tworzenie korzenia React-a dla podanego kontenera
+        root.render(<Echo />);                             // Renderowanie komponentu
+    </script>
+  </body>
+</html>
