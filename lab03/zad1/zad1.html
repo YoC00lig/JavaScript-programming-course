@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animation</title>
+    <script src="worker.js"></script>
   </head>
   <body>
     <form onsubmit="event.preventDefault();">
@@ -29,11 +30,12 @@
       <br>
       <label for="iterations_worker">Number of iterations:</label>
       <input id="iterations_worker" type="text" value="50">
-      <button onclick="void(0)">Run calculations</button>
+      <button onclick="runWorker()">Run calculations</button>
     </form>
     <script>
       var animation;
       var i = 0;
+
       function calculatePrimes() {
         const iterations = document.forms[0].iterations_main.value || 50;
         // Source: https://udn.realityripple.com/docs/Tools/Performance/Scenarios/Intensive_JavaScript
@@ -54,23 +56,49 @@
         }
         return primes;
       }
+
       function startAnimation() {
         document.forms[0].start.disabled = true;
         document.forms[0].stop.disabled = false;
         animation = window.requestAnimationFrame(step);
       }
+
       function step() {
         document.forms[0].counter.value = i++;
         animation = window.requestAnimationFrame(step);
       }
+
       function stopAnimation() {
         document.forms[0].start.disabled = false;
         document.forms[0].stop.disabled = true;
         window.cancelAnimationFrame(animation)
       }
+      
+      // Tworzymy nowy obiekt Worker z pliku JavaScript worker.js.
+      var worker = new Worker('worker.js');
+
+      // Definiowana jest funkcja runWorker, która pobiera wartość 
+      // iterations z formularza HTML i wysyła ją do pracy w tle
+      // poprzez wywołanie metody postMessage na obiekcie worker.
+      function runWorker() {
+        var iterations = document.forms[0].iterations_worker.value || 50;
+        worker.postMessage(iterations);
+      }
+
+      // Na obiekcie worker ustawiany jest słuchacz zdarzeń dla 
+      // wiadomości, który oczekuje na wiadomość zwrotną od worker-a.
+      worker.addEventListener('message', function(event) {
+        // W momencie otrzymania wiadomości zwrotnej,
+        // słuchacz zdarzeń wykonuje funkcję obsługi, 
+        // która aktualizuje wynik w formularzu HTML za pomocą event.data.
+        document.forms[0].result_worker.value = event.data;
+      });
+
     </script>
   </body>
 </html>
+
+
 
 <!-- czy obliczenia mają negatywny wpływ na szybkość działania licznika?
 
@@ -97,3 +125,12 @@ setInterval, która wywołuje daną funkcję cięgle co określony interwał cza
 requestAnimationFrame - Funkcja ta umożliwia podanie na jej wejście innej funkcji, która zostanie wywołana w odpowiedzi na odświeżenie okna przeglądarki.
 -->
 
+
+
+ <!-- Sprawdź, czy znaczące zwiększenie liczby iteracji — 
+ wpisz wartość 2000 do pola iterations_worker, a następnie 
+ uruchom obliczenia — ma nadal negatywny wpływ na szybkość
+  działania licznika, bądź czy GUI, z opóźnieniem, reaguje na
+   akcje użytkownika? -->
+
+<!-- Gui z opoznieniem reaguje na akcje uzytkownika -->
