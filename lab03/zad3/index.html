@@ -120,13 +120,78 @@
             }
         }
         
+        class Red2 extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {value:"50"};
+                this.runScript = this.runScript.bind(this);
+                this.handleChange = this.handleChange.bind(this);
+            }
+            
+            runScript(e) {
+                var primes = [];
+                for (var i = 0; i < this.state.value; i++) {
+                var candidate = i * (1000000000 * Math.random());
+                var isPrime = true;
+                for (var c = 2; c <= Math.sqrt(candidate); ++c) {
+                    if (candidate % c === 0) {
+                    // not prime
+                    isPrime = false;
+                    break;
+                    }
+                }
+                if (isPrime) {
+                    primes.push(candidate);
+                }
+                }
+                let numbers = primes;
+                let result = '[' + numbers.map((number) => `${number}`).join(', ') + ']';
+                    this.props.handle(result);
+            }
+
+            handleChange(e){
+                this.setState({value: e.target.value})
+            }
+
+            render() {
+                return (
+                <div className="container my-4 bg-danger">
+                    <h1 className="text-center">Iterations:</h1>
+                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    <button onClick={this.runScript}>Calculate</button>
+                </div>
+                );
+            }
+        }
+
+        class Grey2 extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {received: null};
+                this.handleResult = this.handleResult.bind(this);
+            }
+
+            handleResult(result) {
+                this.setState({ received: result });
+            }
+
+            render() {
+                return (
+                <div className="container my-4 bg-secondary">
+                    <Yellow wynik={this.state.received} />
+                    <Red2 handle={this.handleResult} />
+                </div>
+                );
+            }
+        }
+
         class App extends React.Component{
             render() {
                 return (<React.Fragment>
                     <Result />
                     <Grey />
                     <Result />
-                    <Grey />
+                    <Grey2 />
                 </React.Fragment>);
             }
         }
