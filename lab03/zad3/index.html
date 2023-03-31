@@ -39,9 +39,7 @@
             }
 
             startTimer() {
-                this.intervalID = setInterval(() => {
-                this.setState((prevState) => ({ result: prevState.result + 1 }));
-                }, 1000);
+                this.intervalID = setInterval(() => { this.setState({ result: ++this.state.result });}, 1000);
             }
 
             stopTimer() {
@@ -62,15 +60,73 @@
         
         class Yellow extends React.Component {
             render() {
-                return <div>Result: {this.props.result}</div>;
+                return <div className="container my-4 bg-warning">Result: {this.props.wynik}</div>;
             }
         }
 
+        class Red extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {value:"50"};
+                this.runScript = this.runScript.bind(this);
+                this.handleChange = this.handleChange.bind(this);
+            }
+            
+
+            runScript(e) {
+                const worker = new Worker("worker.js");
+                worker.onmessage = (e) => {
+                    let numbers = e.data;
+                    let result = '[' + numbers.map((number) => `${number}`).join(', ') + ']';
+                    this.props.handle(result);
+                    worker.terminate();
+                }
+                worker.postMessage(this.state.value);
+            };
+
+            handleChange(e){
+                this.setState({value: e.target.value})
+            }
+
+            render() {
+                return (
+                <div className="container my-4 bg-danger">
+                    <h1 className="text-center">Iterations:</h1>
+                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    <button onClick={this.runScript}>Calculate</button>
+                </div>
+                );
+            }
+        }
+
+        class Grey extends React.Component{
+            constructor(props) {
+                super(props);
+                this.state = {received: null};
+                this.handleResult = this.handleResult.bind(this);
+            }
+
+            handleResult(result) {
+                this.setState({ received: result });
+            }
+
+            render() {
+                return (
+                <div className="container my-4 bg-secondary">
+                    <Yellow wynik={this.state.received} />
+                    <Red handle={this.handleResult} />
+                </div>
+                );
+            }
+        }
         
         class App extends React.Component{
             render() {
                 return (<React.Fragment>
                     <Result />
+                    <Grey />
+                    <Result />
+                    <Grey />
                 </React.Fragment>);
             }
         }

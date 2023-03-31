@@ -46,6 +46,19 @@ form.addEventListener("submit", function(event) {
   };
 });
 
+const startDate = document.getElementById('startDate');
+const endDate = document.getElementById('endDate');
+
+startDate.addEventListener('change', () => {
+  const minDate = new Date(startDate.value);
+  minDate.setDate(minDate.getDate() + 1);
+  endDate.min = minDate.toISOString().split('T')[0]; // ISO String (w formacie 
+  //YYYY-MM-DDTHH:mm:ss.sssZ). Następnie używa metody 
+  // split() z argumentem 'T' aby podzielić wartość 
+  // na dwie części: część daty i część czasu.
+  // Następnie bierze tylko część daty za pomocą indeksu [0]
+});
+
 var logo = document.getElementById('logo');
 var ctx = logo.getContext('2d');   
 
