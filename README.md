@@ -6,3 +6,5 @@
 
 <p>🌸 <a href="https://github.com/YoC00lig/JavaScript-programming-course/tree/main/lab02">lab02</a> - JavaScript basics, mocha-chai tests, canvas </p>
 
+<p>🌸 <a href="https://github.com/YoC00lig/JavaScript-programming-course/tree/main/lab03">lab03</a> - React basics, workers, DOM </p>
+
