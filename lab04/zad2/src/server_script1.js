@@ -86,4 +86,4 @@ function requestListener(request, response) {
 const server = http.createServer(requestListener); // The 'requestListener' function is defined above
 server.listen(8000);
 console.log('The server was started on port 8000');
-console.log('To stop the server, press "CTRL + C"');    <br></br>
+console.log('To stop the server, press "CTRL + C"');   
