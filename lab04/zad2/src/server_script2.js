@@ -5,8 +5,9 @@ import { exec } from 'child_process';
 const filePath = 'lab04/zad2/src/licznik.txt';
 
 function readCounter(isAsync, callback) {
+  console.log("HERE");
   if (isAsync) {
-    fs.promises.readFile(filePath, 'utf8').then((fileContent) => {
+    fs.readFile(filePath, 'utf8').then((fileContent) => {
       const count = parseInt(fileContent);
       callback(count);
     }).catch((err) => {
@@ -29,6 +30,7 @@ function incrementCounter(isAsync, res) {
   readCounter(isAsync, (count) => {
 
     count++;
+    console.log(`Aktualny stan licznika: ${count}`);
     
     if (isAsync) {
       fs.promises.writeFile(filePath, count.toString()).then(() => {
@@ -61,6 +63,8 @@ function execute(command, res) {
     res.end(`<pre>${output}</pre>`);
   });
 }
+
+
 function listener(req, res) {
   console.log('--------------------------------------');
   console.log(`The relative URL of the current request: ${req.url}`);
@@ -102,12 +106,19 @@ function listener(req, res) {
       const post = new URLSearchParams(body);
       const operation = post.get('operation');
       const commands = post.get('commands');
-      if (operation === 'sync') incrementCounter(false, res);
-      else if (operation === 'async') incrementCounter(true, res)
-      else execute(commands, res);
-      });
-    }
+      if (operation === 'sync') {
+        incrementCounter(false, res);
+      }
+      else if (operation === 'async') {
+        incrementCounter(true, res);
+      }
+      else {
+        execute(commands, res);
+      }
+    });
+  }
 }
+
 
 const server = http.createServer(listener); 
 server.listen(8000);
