@@ -3,7 +3,8 @@
 
 const http = require('node:http');
 const { URL } = require('url');
-const qs = require('qs');
+const qs = require('qs'); // funkcja querystring wbudowana 
+// w Node.js do parsowania danych POST
 
 function requestListener(request, response) {
   console.log('--------------------------------------');
