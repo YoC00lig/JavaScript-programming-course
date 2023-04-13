@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: server_script2.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: server_script2.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import http from 'http';
+import fs from 'fs';
+import { exec } from 'child_process';
+import {Buffer} from 'buffer'; /// npx eslint --fix 'src/server_script2.js' - bez tego importu jest błąd
+
+const filePath = 'licznik.txt';
+
+
+/** Opis funkcji readCounter . */
+function readCounter(async, callback) {
+
+  if (async) {
+    fs.readFile(filePath, 'utf8', (err, fileContent) => {
+      if (err) {
+        console.error(`Nie udało się odczytać pliku: ${err}`);
+        return;
+      }
+      const count = parseInt(fileContent);
+      callback(count);
+    });
+  } 
+
+  else {
+    try {
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const count = parseInt(fileContent);
+      callback(count);
+    } 
+    catch (err) {
+      console.error(`Nie udało się odczytać pliku: ${err}`);
+      return;
+    }
+  }
+}
+
+/** opis funkcji incrementCounter . */
+
+function incrementCounter(isAsync, res) {
+
+  readCounter(isAsync, (count) => {
+
+    count++;
+    console.log(`Aktualny stan licznika: ${count}`);
+    
+    if (isAsync) {
+      fs.writeFile(filePath, count.toString(), (err) =>  {
+        if (err) {
+          console.error(`Nie udało się zapisać pliku: ${err}`);
+          return;
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(`Liczba uruchomień: ${count}`);
+      });
+    } 
+
+    else {
+      try {
+        fs.writeFileSync(filePath, count.toString());
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(`Liczba uruchomień: ${count}`);
+      } 
+      catch (err) {
+        console.error(`Nie udało się zapisać pliku: ${err}`);
+      }
+    }
+  });
+}
+
+/** opis funkcji execute. */
+function execute(command, res) {
+  if (!command) {
+    console.error('Nie podano komendy.');
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    res.end('Nie podano komendy.');
+    return;
+  }
+
+  exec(command, (err, output) => {
+    if (err) {
+      console.error(`Nie udało się wykonać komendy: ${err}`);
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end(`Nie udało się wykonać komendy: ${err}`);
+      return;
+    }
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end(`&lt;pre>${output}&lt;/pre>`);
+    console.log(`Wynik: ${output}`)
+  });
+}
+
+
+
+function listener(req, res) {
+  console.log('--------------------------------------');
+  console.log(`The relative URL of the current request: ${req.url}`);
+  console.log(`Access method: ${req.method}`);
+  console.log('--------------------------------------');
+
+  if (req.url === '/') {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(`
+      &lt;html>
+        &lt;body>
+
+          &lt;form id="myForm" method="post">
+
+            &lt;select name="operation">
+              &lt;option value="-">-&lt;/option>
+              &lt;option value="sync">sync&lt;/option>
+              &lt;option value="async">async&lt;/option>
+            &lt;/select>
+
+            &lt;br/>
+            &lt;textarea name="commands">&lt;/textarea>
+            &lt;br/>
+
+            &lt;button type="submit">Start&lt;/button>
+            
+          &lt;/form>
+
+        &lt;/body>
+      &lt;/html>
+    `);
+    res.end();
+  
+    if (req.method === 'POST'){
+      const body = [];
+
+      req.on('data', (operationCommand) => body.push(operationCommand)).on('end', () => {
+
+        /**
+       * Reprezentuje informacje dotyczace wykonywanej operacji.
+       * @param {string} params - nowy obiekt URLSearchParams na podstawie ciągu znaków data.
+       * @param {string} operation - nazwa wykonywanej operacji
+       * @param {string} commands - zawiera informację dotyczącą polecenia 
+       */
+        const data = Buffer.from(body).toString();
+        const params = new URLSearchParams(data);
+        const operation = params.get('operation');
+        const commands = params.get('commands');
+
+        if (operation === 'sync') incrementCounter(false, res);
+        else if (operation === 'async') incrementCounter(true, res);
+        else execute(commands, res);
+      });
+  }}
+}
+
+const server = http.createServer(listener); 
+server.listen(8000);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#execute">execute</a></li><li><a href="global.html#incrementCounter">incrementCounter</a></li><li><a href="global.html#readCounter">readCounter</a></li><li><a href="global.html#requestListener">requestListener</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Apr 13 2023 19:28:22 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
