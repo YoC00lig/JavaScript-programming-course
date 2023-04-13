@@ -8,3 +8,5 @@
 
 <p>🌸 <a href="https://github.com/YoC00lig/JavaScript-programming-course/tree/main/lab03">lab03</a> - React basics, workers, DOM4 </p>
 
+<p>🌸 <a href="https://github.com/YoC00lig/JavaScript-programming-course/tree/main/lab04">lab04</a> - NodeJS </p>
+
