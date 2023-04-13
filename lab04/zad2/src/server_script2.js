@@ -96,17 +96,23 @@ function listener(req, res) {
     res.write(`
       <html>
         <body>
+
           <form id="myForm" method="post">
+
             <select name="operation">
               <option value="-">-</option>
               <option value="sync">sync</option>
               <option value="async">async</option>
             </select>
+
             <br/>
-            <textarea name="commands" rows="10" cols="40"></textarea>
+            <textarea name="commands"></textarea>
             <br/>
+
             <button type="submit">Start</button>
+            
           </form>
+
         </body>
       </html>
     `);
@@ -114,17 +120,29 @@ function listener(req, res) {
   
     if (req.method === 'POST'){
       const body = [];
-      req.on('data', (chunk) => body.push(chunk)).on('end', () => {
 
+      // Dodaje funkcję zwrotną, która zostanie
+      // wywołana za każdym razem, gdy zostanie 
+      //otrzymany kawałek danych w żądaniu, do strumienia żądania.
+
+      // Potem dodaje kolejną funkcję zwrotną,
+      // która zostanie wywołana, gdy cała treść 
+      // żądania zostanie przesłana.
+      req.on('data', (operationCommand) => body.push(operationCommand)).on('end', () => {
+
+        // Łączy kawałki danych otrzymane w żądaniu w 
+        // jeden ciąg znaków i zapisuje go do zmiennej data.
         const data = Buffer.concat(body).toString();
+        // Tworzy nowy obiekt URLSearchParams na podstawie ciągu znaków data.
         const params = new URLSearchParams(data);
+        // Pobiera wartość parametru i zapisuje do danej zmiennej
         const operation = params.get('operation');
         const commands = params.get('commands');
 
+        // Wywołuje jedną z trzech funkcji w zależności od wykonywanej operacji
         if (operation === 'sync') incrementCounter(false, res);
         else if (operation === 'async') incrementCounter(true, res);
         else execute(commands, res);
-
       });
   }}
 }
