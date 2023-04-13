@@ -112,20 +112,21 @@ function listener(req, res) {
     `);
     res.end();
   
-    const body = [];
-    req.on('data', (chunk) => body.push(chunk)).on('end', () => {
+    if (req.method === 'POST'){
+      const body = [];
+      req.on('data', (chunk) => body.push(chunk)).on('end', () => {
 
-      const data = Buffer.concat(body).toString();
-      const params = new URLSearchParams(data);
-      const operation = params.get('operation');
-      const commands = params.get('commands');
+        const data = Buffer.concat(body).toString();
+        const params = new URLSearchParams(data);
+        const operation = params.get('operation');
+        const commands = params.get('commands');
 
-      if (operation === 'sync') incrementCounter(false, res);
-      else if (operation === 'async') incrementCounter(true, res);
-      else execute(commands, res);
+        if (operation === 'sync') incrementCounter(false, res);
+        else if (operation === 'async') incrementCounter(true, res);
+        else execute(commands, res);
 
-    });
-  }
+      });
+  }}
 }
 
 const server = http.createServer(listener); 
