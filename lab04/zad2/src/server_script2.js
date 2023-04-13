@@ -2,28 +2,34 @@ import http from 'http';
 import fs from 'fs';
 import { exec } from 'child_process';
 
-const filePath = 'lab04/zad2/src/licznik.txt';
+const filePath = 'licznik.txt';
 
-function readCounter(isAsync, callback) {
-  console.log("HERE");
-  if (isAsync) {
-    fs.readFile(filePath, 'utf8').then((fileContent) => {
+function readCounter(async, callback) {
+
+  if (async) {
+    fs.readFile(filePath, 'utf8', (err, fileContent) => {
+      if (err) {
+        console.error(`Nie udało się odczytać pliku: ${err}`);
+        return;
+      }
       const count = parseInt(fileContent);
       callback(count);
-    }).catch((err) => {
-      console.error(`Nie udało się odczytać pliku: ${err}`);
     });
   } 
+
   else {
     try {
       const fileContent = fs.readFileSync(filePath, 'utf8');
       const count = parseInt(fileContent);
       callback(count);
-    } catch (err) {
+    } 
+    catch (err) {
       console.error(`Nie udało się odczytać pliku: ${err}`);
+      return;
     }
   }
 }
+
 
 function incrementCounter(isAsync, res) {
 
@@ -33,11 +39,13 @@ function incrementCounter(isAsync, res) {
     console.log(`Aktualny stan licznika: ${count}`);
     
     if (isAsync) {
-      fs.promises.writeFile(filePath, count.toString()).then(() => {
+      fs.writeFile(filePath, count.toString(), (err) =>  {
+        if (err) {
+          console.error(`Nie udało się zapisać pliku: ${err}`);
+          return;
+        }
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(`Liczba uruchomień: ${count}`);
-      }).catch((err) => {
-        console.error(`Nie udało się zapisać pliku: ${err}`);
       });
     } 
 
@@ -46,7 +54,8 @@ function incrementCounter(isAsync, res) {
         fs.writeFileSync(filePath, count.toString());
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(`Liczba uruchomień: ${count}`);
-      } catch (err) {
+      } 
+      catch (err) {
         console.error(`Nie udało się zapisać pliku: ${err}`);
       }
     }
@@ -54,15 +63,26 @@ function incrementCounter(isAsync, res) {
 }
 
 function execute(command, res) {
+  if (!command) {
+    console.error('Nie podano komendy.');
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    res.end('Nie podano komendy.');
+    return;
+  }
+
   exec(command, (err, output) => {
     if (err) {
-      console.error('Nie udało się wykonać komendy: ', err);
+      console.error(`Nie udało się wykonać komendy: ${err}`);
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end(`Nie udało się wykonać komendy: ${err}`);
       return;
     }
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end(`<pre>${output}</pre>`);
+    console.log(`Wynik: ${output}`)
   });
 }
+
 
 
 function listener(req, res) {
@@ -76,49 +96,37 @@ function listener(req, res) {
     res.write(`
       <html>
         <body>
-
-          <form method="post">
-
+          <form id="myForm" method="post">
             <select name="operation">
               <option value="-">-</option>
               <option value="sync">sync</option>
               <option value="async">async</option>
             </select>
-
             <br/>
             <textarea name="commands" rows="10" cols="40"></textarea>
             <br/>
-
             <button type="submit">Start</button>
-
           </form>
-
         </body>
       </html>
     `);
     res.end();
-  }
-  else if (req.method === 'POST') {
-    let body = '';
-    req.on('data', (data) => body += data);
-    console.log(body);
-    req.on('end', () => {
-      const post = new URLSearchParams(body);
-      const operation = post.get('operation');
-      const commands = post.get('commands');
-      if (operation === 'sync') {
-        incrementCounter(false, res);
-      }
-      else if (operation === 'async') {
-        incrementCounter(true, res);
-      }
-      else {
-        execute(commands, res);
-      }
+  
+    const body = [];
+    req.on('data', (chunk) => body.push(chunk)).on('end', () => {
+
+      const data = Buffer.concat(body).toString();
+      const params = new URLSearchParams(data);
+      const operation = params.get('operation');
+      const commands = params.get('commands');
+
+      if (operation === 'sync') incrementCounter(false, res);
+      else if (operation === 'async') incrementCounter(true, res);
+      else execute(commands, res);
+
     });
   }
 }
-
 
 const server = http.createServer(listener); 
 server.listen(8000);
