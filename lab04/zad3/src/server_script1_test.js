@@ -3,7 +3,7 @@
 /* eslint-disable indent */
 // Source:  https://codeforgeek.com/unit-testing-nodejs-application-using-mocha/
 // const supertest = require('supertest');
-import supertest from 'supertest';
+const supertest = require('supertest');
 // This agent refers to PORT where program is runninng.
 const server = supertest.agent('http://localhost:8000');
 // UNIT test begin
