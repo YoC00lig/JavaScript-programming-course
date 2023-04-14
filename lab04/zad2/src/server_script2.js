@@ -2,7 +2,7 @@ import http from 'http';
 import fs from 'fs';
 import { exec } from 'child_process';
 
-const filePath = 'licznik.txt';
+const filePath = '/Users/joannakulig/Desktop/Algorytmy-geometryczne-3sem/.git/JavaScript-programming-course/lab04/zad2/src/licznik.txt';
 
 function readCounter(async, callback) {
 
