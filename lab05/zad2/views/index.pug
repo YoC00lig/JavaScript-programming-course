@@ -15,3 +15,14 @@ html(lang='en')
                 input(type='submit')
                 input(type='reset')
             img(src='/img/kotki.png')
+
+            table(border='1')
+                thead
+                    tr
+                        th Nazwisko
+                        th Imię
+                tbody
+                    each student in students
+                        tr
+                        td= student.lname
+                        td= student.fname

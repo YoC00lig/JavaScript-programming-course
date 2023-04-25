@@ -20,8 +20,22 @@ app.use(morgan('dev'));
 /* ******** */
 /* "Routes" */
 /* ******** */
+
+
+let students = [
+    {
+          fname: 'Jan',
+          lname: 'Kowalski'
+    },
+    {
+          fname: 'Anna',
+          lname: 'Nowak'
+    },
+];
+
+
 app.get('/', function (request, response) {
-    response.render('index'); // Render the 'index' view
+    response.render('index', { students: students }); // Render the 'index' view
 });
 
 app.post('/', function (request, response) {
