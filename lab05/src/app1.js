@@ -5,10 +5,23 @@ import { fileURLToPath } from 'url';
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 /* ************************************************ */
 /* Determining the contents of the middleware stack *
 /* ************************************************ */
 app.use(morgan('dev')); // Place an HTTP request recorder on the stack — each request will be logged in the console in 'dev' format
+
+
+
+
+// dodanie parsera ciała żądania (body parser) do aplikacji, który pozwoli na odczytanie przesłanych danych z formularza POST.
+// Linijka ta doda middleware do aplikacji, który odczytuje dane z formularzy POST i umieszcza je w obiekcie req.body.
+app.use(express.urlencoded({ extended: false }));
+
+
+
+
+
 app.use(express.static(__dirname + '/public')); // Place the built-in middleware 'express.static' — static content (files .css, .js, .jpg, etc.) will be provided from the 'public' directory
 /* ******** */
 /* "Routes" */
@@ -53,9 +66,32 @@ app.get('/submit', function (request, response) {
     // Place given data (here: 'Hello <name>') in the body of the answer
     response.send(`Hello ${request.query.name}`); // Send a response to the browser
 });
+
+
+
+
+// Obsługa żądania POST 
+app.post('/', function(req, res) {
+   res.set('Content-Type', 'text/plain');
+   res.send(`Hello ${req.body.name}`);
+ });
+
+
+
+
+
+
 /* ************************************************ */
 // The application is to listen on port number 8000
 app.listen(8000, function () {
     console.log('The server was started on port 8000');
     console.log('To stop the server, press "CTRL + C"');
 });         
+
+
+
+
+/// sprawdz dzialanie dla 2.4
+// ad1: Hello Jan
+// ad2: Hello undefined
+// ad3: Cannot GET /dowolnyTekst
