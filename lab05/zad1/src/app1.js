@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 
-app.use(express.static(__dirname + '/public')); // Place the built-in middleware 'express.static' — static content (files .css, .js, .jpg, etc.) will be provided from the 'public' directory
+app.use(express.static(__dirname + '/../public'));// Place the built-in middleware 'express.static' — static content (files .css, .js, .jpg, etc.) will be provided from the 'public' directory
 /* ******** */
 /* "Routes" */
 /* ******** */
@@ -49,6 +49,9 @@ app.get('/', function (request, response) {
                 <input type="submit">
                 <input type="reset">
              </form>
+             <img src="/img/kotki.png" alt="kotki">
+
+
           </main>
        </body>
     </html>    
