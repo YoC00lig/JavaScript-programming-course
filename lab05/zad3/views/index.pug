@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        title Third Express application
+    body
+        main
+            h1 Third Express application
+
+            form(method='POST' action='/')
+                label(for='name') Give your name
+                input(name='name')
+                br
+                input(type='submit')
+                input(type='reset')
+            img(src='/img/kotki.png')
+
+            table(border='1')
+                thead
+                    tr
+                        th Nazwisko
+                        th Imię
+                        th Wydział
+                tbody
+                    each student in students
+                        tr
+                            td= student.nazwisko
+                            td= student.imie 
+                            td= student.wydzial
