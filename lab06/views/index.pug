@@ -21,12 +21,20 @@ html(lang='en')
             /**************************************************************************************/
             /* Function that retrieves the content of one of the selected text fields of the form */
             /**************************************************************************************/
-            function getName(http_method) {
+            function getName(http_method){
                 let name = '';
-                if (http_method === 'GET') name = document.getElementById('name_GET').value;
-                else if (http_method === 'POST') name = document.getElementById('name_POST').value;
+
+                if (http_method === 'GET') {
+                    const nameInput = document.getElementById('name_GET');
+                    name = nameInput.value;
+                } else if (http_method === 'POST') {
+                    const nameInput = document.getElementById('name_POST');
+                    name = nameInput.value;
+                }
+
                 return name;
             }
+
             
             /**************************************************************************************/
             /* Function that performs (asynchronous) query to the web server using AJAX           */
@@ -35,56 +43,59 @@ html(lang='en')
             /* response_type ∈ ["text", "json", "document"]                                       */ 
             /* name - Contents of the form's text box - data that needs to be sent asynchronously */
             /**************************************************************************************/
-            function requestAJAX(http_method, response_type, name, show_alert = false) {
+            function requestAJAX(http_method, response_type, name, show_alert=false) {
+                //-----------------------------------------------
+                // Create an object representing the request to the web server — see https://developer.mozilla.org/docs/Web/API/XMLHttpRequest
+                //-----------------------------------------------
                 const xhr = new XMLHttpRequest();
-                xhr.addEventListener("load", function (evt) {
+
+                //-----------------------
+                // Observers registration
+                //-----------------------
+
+                // If the request was successful
+                xhr.addEventListener("load", function (evt) {                          
                     if (xhr.status === 200) {
                         console.group('AJAX');
                         console.log(`HTTP method ⟶\t\t${http_method}\nResponse type ⟶\t${response_type}\nInput data ⟶\t\t${name}`);
                         console.log(xhr.response);
                         console.groupEnd();
-                        if (show_alert) {
-                            let processedResponse;
-
-                            switch (response_type) {
-                                case 'json':
-                                    processedResponse = JSON.stringify(xhr.response);
-                                    break;
-                                case 'document':
-                                    const parser = new DOMParser();
-                                    const xmlString = xhr.response.toString();
-                                    const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
-                                    processedResponse = new XMLSerializer().serializeToString(xmlDoc);
-                                    break;
-                                default:
-                                    processedResponse = xhr.response;
-                            }
-
-                            window.alert(processedResponse);
-                        } else {
+                        if(show_alert){
+                            
+                            window.alert(xhr.response);
+                        }
+                        else { 
                             results.set(`ajax ${http_method} ${response_type}`, xhr.response);
-                            dispatchEvent(received);
+                            dispatchEvent(received); 
                         }
                     }
                 });
+
+                // If the request was failed
                 xhr.addEventListener("error", function (evt) {
                     window.alert('There was a problem with this request.');
                 });
-                xhr.responseType = response_type;
+
+                //--------------------------------------------------------------------------
+                // Configuration and execution of the (asynchronous) query to the web server
+                //--------------------------------------------------------------------------
+                xhr.responseType = response_type;  // Type of data received by the 'load' observer
                 xhr.open(http_method, 'http://localhost:8000/submit', true);
-                switch (response_type) {
+
+                //****************************************************************************************
+                // What is the acceptable data type - the server part should return data of the given type
+                // Default value: '*/*'
+                //****************************************************************************************
+                switch(response_type){
                     case 'json':
                         xhr.setRequestHeader('Accept', 'application/json');
                         break;
                     case 'document':
                         xhr.setRequestHeader('Accept', 'application/xml');
                         break;
-                }
-                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-                xhr.send(http_method === 'POST' ? JSON.stringify({ name: name }) : null);
+                }       
+               xhr.send(null);
             }
-
-
 
             /**************************************************************************************/
             /* Function that performs (asynchronous) query to the web server  usingFetch API      */
@@ -93,65 +104,55 @@ html(lang='en')
             /* response_type ∈ ["text", "json", "xml"]                                            */ 
             /* name - Contents of the form's text box - data that needs to be sent asynchronously */
             /**************************************************************************************/
-            function requestFetchAPI(http_method, response_type, name, show_alert = false) {
+            function requestFetchAPI(http_method, response_type, name, show_alert=false) {
                 let accept = '*/*';
-                switch (response_type) {
+
+                switch(response_type){
                     case 'json':
-                    accept = 'application/json';
-                    break;
+                        accept = 'application/json';
+                        break;
                     case 'xml':
-                    accept = 'application/xml';
-                    break;
+                        accept = 'application/xml';
+                        break;
                 }
                 fetch('http://localhost:8000/submit', {
                     method: http_method,
                     headers: {
-                    Accept: accept
-                    },
-                    body: http_method === 'POST' ? JSON.stringify({ name: name }) : null
-                })
-                    .then(function (response) {
+                        //****************************************************************************************
+                        // What is the acceptable data type—the server part should return data of the given type
+                        //****************************************************************************************
+                        Accept: accept
+                    }
+                }) // Execution of the (asynchronous) query to the web server — a promise is created
+                .then(function (response) { // if the promise is fulfilled
                     if (!response.ok)
                         throw Error(response.statusText);
+
                     console.group('Fetch API');
                     console.log(`HTTP method ⟶\t\t${http_method}\nResponse type ⟶\t${response_type}\nInput data ⟶\t\t${name}`);
                     let result;
+
                     if (!response.headers.get('content-type')?.includes('application/json')) {
-                        result = response.text();
-                    } else {
+                        // If the received data is plain text or an XML document
+                        result = response.text(); 
+                    }
+                    else {
+                        //If the received data is a JSON document
                         result = response.json();
                     }
                     console.log(result);
-                    console.groupEnd();
-                    if (show_alert) {
-                        result.then(function (data) {
-                        let processedResponse;
-                        switch (response_type) {
-                            case 'json':
-                            processedResponse = JSON.stringify(data);
-                            break;
-                            case 'xml':
-                            const parser = new DOMParser();
-                            const xmlString = data.toString();
-                            const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
-                            processedResponse = new XMLSerializer().serializeToString(xmlDoc);
-                            break;
-                            default:
-                            processedResponse = data;
-                        }
-                        window.alert(processedResponse);
-                        });
-                    } else {
-                        result.then(function (data) {
-                        results.set(`fetch ${http_method} ${response_type}`, data);
+                    console.groupEnd();   
+                    if(show_alert)
+                        window.alert(result);  
+                    else {
+                        results.set(`fetch ${http_method} ${response_type}`, result);
                         dispatchEvent(received);
-                        });
                     }
-                    })
-                    .catch(function (error) {
-                    window.alert('There was a problem with this request.');
-                    });
-                }
+                })
+                .catch(function (error) { // if the promise is rejected
+                    window.alert(error);
+                });
+            }
         script(src="https://unpkg.com/chai/chai.js")
         script(src="https://unpkg.com/mocha/mocha.js") 
     body
@@ -187,19 +188,20 @@ html(lang='en')
                     each method in ["GET", "POST"]
                         td
                             each type in ["text", "json", "document"]
-                                button(onclick=`console.clear() ; requestAJAX("${method}","${type}", getName('${method}', '${type}'), true)`) #{type}
+                                
+                                button(onclick=`console.clear() ; requestAJAX("${method}","${type}", getName('${method}'), true)`) #{type}
                 tr
                     th Fetch API 
                     each method in ["GET", "POST"]
                         td
                             each type in ["text", "json", "xml"]
-                                button(onclick=`console.clear() ; requestFetchAPI("${method}","${type}", getName('${method}', '${type}'), true)`) #{type}
-
+                                button(onclick=`console.clear() ; requestFetchAPI("${method}","${type}", getName('${method}'), true)`) #{type}
         h1 Unit tests
         button(onclick='window.location.reload();') Restart
         div(id="mocha")
         script.
             const name = 'ą/?:@&=+$#';
+
             if(window.location.port == 8000) { 
                 window.addEventListener("load", (event) => {
                     for(let method of ["GET","POST"]){
@@ -217,16 +219,20 @@ html(lang='en')
             var results = new Map();
             var received = new Event('received');
             var test_executed = false;
+
             function decodeHtml(html) {
                 var txt = document.createElement("textarea");
                 txt.innerHTML = html;
+
                 return txt.value;
             }
+
             addEventListener('received', (e) => {
                 if(!test_executed && results.size === 12){
                     const expect = chai.expect; 
                     const parser = new DOMParser();
                     const xml_document= parser.parseFromString("<welcome>Hello 'ą/?:@&=+$#'</welcome>","text/xml");
+
                     describe('AJAX requests', function() {
                         it(`Returns "Hello '${name}'" for requestAJAX('GET','text')`, function() {
                             expect(results.get('ajax GET text')).to.equal(`Hello '${name}'`);
