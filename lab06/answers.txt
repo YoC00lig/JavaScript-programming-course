@@ -1,0 +1,115 @@
+zadanie 6
+
+co wyświetla konsola serwera?
+
+Terminal, w którym jest uruchomiony skrypt app1.js, wyświetla informacje dotyczące 
+uruchomienia serwera, takie jak adres IP, port i inne szczegóły, a także informacje
+ o odebranych żądaniach i wysłanych odpowiedziach:
+
+curl --include http://localhost:8000/submit?name=Jane%20Doe%20R%C3%B3%C5%BCa ; echo
+curl --include http://localhost:8000/submit?name=Jane%20Doe%20R%C3%B3%C5%BCa
+The server sent a plain text to the browser using the 'GET' method
+GET /submit?name=Jane%20Doe%20R%C3%B3%C5%BCa 200 0.544 ms - 23
+The server sent a JSON document to the browser using the 'GET' method
+GET /submit?name=Jane%20Doe%20R%C3%B3%C5%BCa 200 0.287 ms - 37
+The server sent an XML document to the browser using the 'GET' method
+GET /submit?name=Jane%20Doe%20R%C3%B3%C5%BCa 200 0.584 ms - 51
+The server sent a plain text to the browser using the 'POST' method
+POST /submit 200 20.239 ms - 23
+The server sent a JSON document to the browser using the 'POST' method
+POST /submit 200 0.815 ms - 37
+The server sent an XML document to the browser using the 'POST' method
+POST /submit 200 0.699 ms - 51
+
+Jaka jest wartość nagłówka odpowiedzi "Content-Type" ?
+
+Content-Type: text/plain; charset=utf-8
+Content-Type: application/json; charset=utf-8
+Content-Type: application/xml; charset=utf-8
+Content-Type: text/plain; charset=utf-8
+Content-Type: application/json; charset=utf-8
+Content-Type: application/xml; charset=utf-8
+
+
+zadanie 8.
+
+czy wynik przetwarzania pojawia się na stronie formularza, czy na osobnej stronie WWW?
+
+Odpowiedź: na stronie formularza
+
+zadanie 9
+
+Zatwierdź dane dowolnym z przycisków sekcji "Asynchronous requests" i zaobserwuj, czy miejsce pojawiania się wyniku uległo zmianie ?
+
+Na tej samej stronie wyświetla się alert zawierający informacje o typie obiektu
+
+
+
+
+zadanie 10
+
+co wyswietla strona przeglądarki WWW? 
+
+Promise
+
+result: "<welcome>Hello ''</welcome>"
+
+status: "resolved"
+
+Prototyp Promise
+
+catch(rejectionHandler)
+
+constructor: function()
+
+all(iterable)
+
+allSettled()
+
+any()
+
+arguments: TypeError: 'arguments', 'callee', and 'caller' cannot be accessed in this context.
+
+caller: TypeError: 'arguments', 'callee', and 'caller' cannot be accessed in this context.
+
+length: 1
+
+name: "Promise"
+
+prototype: Promise {Symbol(Symbol.toStringTag): "Promise"}
+
+race(iterable)
+
+reject(reason)
+
+resolve(value)
+
+Prototyp Function
+
+finally()
+
+then(resolvedHandler, rejectionHandler)
+
+Symbol(Symbol.toStringTag): "Promise"
+
+a co wyswietla konsola serwera? 
+
+
+The server sent a plain text to the browser using the 'GET' method
+GET /submit 200 0.520 ms - 17
+The server sent a JSON document to the browser using the 'GET' method
+GET /submit 200 0.553 ms - 31
+The server sent a JSON document to the browser using the 'GET' method
+GET /submit 304 0.437 ms - -
+The server sent a plain text to the browser using the 'GET' method
+GET /submit 200 0.365 ms - 17
+The server sent an XML document to the browser using the 'GET' method
+GET /submit 200 1.090 ms - 27
+The server sent a JSON document to the browser using the 'POST' method
+POST /submit 200 0.406 ms - 31
+The server sent a plain text to the browser using the 'POST' method
+POST /submit 200 0.465 ms - 17
+The server sent an XML document to the browser using the 'POST' method
+POST /submit 200 0.349 ms - 27
+
+
