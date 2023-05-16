@@ -1,0 +1,9 @@
+Wpisz w przeglądarce adres http://localhost:8001/ i sprawdź, czy operacje asynchroniczne wykonują się poprawnie — naciśnij dowolny z przycisków sekcji "Asynchronous requests" i zobacz, co wyświetlają: okno alertu oraz konsola przeglądarki
+
+okno alertu: There was a problem with this request.
+TypeError: Load failed
+
+konsola: 
+[Error] Fetch API cannot load http://localhost:8000/submit?name= due to access control checks.
+Origin http://localhost:8001 is not allowed by Access-Control-Allow-Origin. Status code: 200
+Failed to load resource: Origin http://localhost:8001 is not allowed by Access-Control-Allow-Origin. Status code: 200
