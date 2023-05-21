@@ -12,3 +12,5 @@
 
 <p>🌸 <a href="https://github.com/YoC00lig/JavaScript-programming-course/tree/main/lab05">lab05</a> - Express, PUG, MongoDB </p>
 
+<p>🌸 <a href="https://github.com/YoC00lig/JavaScript-programming-course/tree/main/lab06">lab06</a> - AJAX and Fetch API </p>
+
