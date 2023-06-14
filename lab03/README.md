@@ -397,5 +397,6 @@ Wypisują wynik obliczeń</li>
 Wykonują, w wątku głównym lub roboczym (do wyboru), czasochłonne obliczenia dla podanej liczby iteracji</li>
     </ul>
   </li>
-
 </ol>
+
+<img src="img.png">
