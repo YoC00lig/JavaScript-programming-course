@@ -14,3 +14,4 @@
 
 <p>🌸 <a href="https://github.com/YoC00lig/JavaScript-programming-course/tree/main/lab06">lab06</a> - AJAX and Fetch API </p>
 
+<img src="/readme/mem1.png">
